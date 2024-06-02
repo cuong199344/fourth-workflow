@@ -4,7 +4,23 @@ on:
   pull_request:
     types: 
       - opened
+    branches:    
+      - master
+      # Toàn bộ branch có phần đầu là dev-, vd: dev-new
+      - 'dev-*'
+      # Cho phép thêm các '/', vd: feat/new/button
+      - 'feat/**'
   workflow_dispatch:
+  push:
+    # Push chỉ được trigger khi push lên các branch dưới và không có sự thay đổi gì trong các file ở đường dẫn ở dưới
+    branches:    
+      - master
+      # Toàn bộ branch có phần đầu là dev-, vd: dev-new
+      - 'dev-*'
+      # Cho phép thêm các '/', vd: feat/new/button
+      - 'feat/**'
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
